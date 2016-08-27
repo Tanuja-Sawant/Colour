@@ -1,36 +1,53 @@
- #include <sys/types.h>
-  #include <unistd.h>
-  #include <stdio.h>
+#include <sys/wait.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
 int main(int argc, char **argv){
-/*	char *myName = argv[1];
+
 	int cpid; 
-
-	for(int i=0;i<3;i++){
+	int status;
+	
+	cpid= fork();
+	if(cpid == 0){
 		cpid= fork();
+		if(cpid != 0){
+			cpid= fork();
+			if(cpid != 0){
+				cpid= fork();
+				if(cpid != 0){ // two
+					printf("I am %d Child is %d \n", getpid(),cpid);
+		
+					int w = waitpid(cpid, &status,WNOHANG);
+					while(w==0){
+						w = waitpid(cpid, &status,WNOHANG);
+					}
+					printf("Exited Now");
+					printf("Status %p \n",&status);
+				}
+				else{ // five
+					
+					for(int i=0;i<10000;i++){
+						for(int j=0;j<10000;j++){
+						}
+					}					
+					printf("I am %d Child is %d \n", getpid(),cpid);
+				}
+			}
+			else{ // four
+				printf("I am %d Child is %d \n", getpid(),cpid);
+			}
+		}
+		else{ // three
+			printf("I am %d Child is %d \n", getpid(),cpid);
+		}
 	}
-	if(cpid == 0){
-
-		printf("child pid: %d \n", getpid());
-		exit(0);
+	else{ // one
+		printf("I am %d Child is %d \n", getpid(),cpid);
 	}
-	else{printf("parent pid= %d\n", getpid());
+		
 
-	exit(0);
-	}
-*/
 
-	char *myName = argv[1];
-	int cpid= fork();
 
-	if(cpid == 0){
-
-		printf("0");
-		exit(0);
-	}
-	else{printf("1");
-
-	exit(0);
-	}
 	/*
 	char *myName = argv[1];
 	int cpid= fork();
@@ -38,7 +55,6 @@ int count0=0;int  count1=0;
 	if(cpid == 0){
 		for(int i=0;i<10000;i++){
 			for(int j=0;j<10000;j++){
-
 			}
 		}
 		printf("0");
@@ -46,8 +62,6 @@ int count0=0;int  count1=0;
 		exit(0);
 	}
 	else{printf("1");
-
-
 	exit(0);
 	}
 	
@@ -66,8 +80,6 @@ int count0=0;int  count1=0;
 			level++;
 		}
 	}
-
-
 	printf("%d\t%d\n", getpid(), level);
 	exit(0);
 */
@@ -75,7 +87,6 @@ int count0=0;int  count1=0;
 	/*int level = 0;
 	int i,count=0;
 	int cpid;
-
 	for (i = 0; i < 3; i++) {
     	cpid = fork();
     	if (cpid == 0) {
@@ -92,10 +103,8 @@ int count0=0;int  count1=0;
 	exit(0);
 	*/
 /*
-
 	pid_t pid;
      char *const parmList[] = {NULL};
-
      if ((pid = fork()) == -1)
         perror("fork error");
      else if (pid == 0) {
@@ -115,7 +124,6 @@ int count0=0;int  count1=0;
         execlp("python", parmList);
         printf("Return not expected. Must be an execv error.n");
      }
-
 */
 return 0;
 
