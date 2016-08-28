@@ -9,10 +9,8 @@ int main(int argc, char **argv){
 
 	int cpid; 
 	int status;
-	int     fd[2], nbytes;
-    char    string[] = "NO\n";
-    char    string2[] = "Yes\n";
-    int   readbuffer;
+	int fd[2];
+    	int val = 0;
 
     pipe(fd);
 	
@@ -30,37 +28,47 @@ int main(int argc, char **argv){
 					int w = waitpid(cpid, &status,WNOHANG);
 					while(w==0){
 						w = waitpid(cpid, &status,WNOHANG);
-						close(fd[1]);
+						
+						// now read the data (will block)
+						read(fd[0], &val, sizeof(val));
+						printf("Parent(%d) received value: %d\n", getpid(), val);
 
-               			 /* Read in a string from the pipe */
-               			 nbytes = read(fd[0], readbuffer, sizeof(readbuffer));
-               			 printf("Received string: %d \n", readbuffer);
+						// close the read-descriptor
+						close(fd[0]);
 					}
 					printf("Exited Now");
 					printf("Status %p \n",&status);
 				}
 				else{ // five
 
-					close(fd[0]);
-
-                	/* Send "string" through the output side of pipe */
-               		 write(fd[1],0, sizeof(readbuffer));
 
 					int i,j;
-					for(i=0;i<100;i++){
+					for(i=0;i<10000;i++){
 						for(j=0;j<10000;j++){
 						}
 					}					
 					printf("I am %d Child is %d Excited\n", getpid(),cpid);
-					close(fd[0]);
+					
 
-                	/* Send "string" through the output side of pipe */
-               		 write(fd[1],1, sizeof(readbuffer));
-                	exit(0);
+					close(fd[0]);
+					// send the value on the write-descriptor.
+					val = 100;
+					write(fd[1], &val, sizeof(val));					
+					// close the write descriptor
+					close(fd[1]);
+
+
 				}
 			}
 			else{ // four
 				printf("I am %d Child is %d \n", getpid(),cpid);
+
+					close(fd[0]);
+					// send the value on the write-descriptor.
+					val = 1000;
+					write(fd[1], &val, sizeof(val));					
+					// close the write descriptor
+					
 			}
 		}
 		else{ // three
