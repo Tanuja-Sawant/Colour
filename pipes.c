@@ -10,7 +10,7 @@ int main(int argc, char **argv){
 	int cpid,gpid1,gpid2,gpid3; 
 	int status;
 	int fd[2];
-    	int val = 0;
+    int val = 0;
 
     pipe(fd);
 	
