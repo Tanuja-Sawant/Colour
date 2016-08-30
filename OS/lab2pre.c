@@ -61,7 +61,7 @@ int main(int argc, char * argv[]){
     if(l==0){
         	while(1==1){
 
-        		if(data[0]>1)
+        		if(data[0]>=1)
         			break;
 
         	}
