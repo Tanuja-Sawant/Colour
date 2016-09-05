@@ -5,6 +5,8 @@
     #include <sys/ipc.h>
     #include <sys/shm.h>
 
+
+    
     int main()
     {
         pid_t child;
@@ -15,9 +17,10 @@
         int *result;
         memid=shmget(IPC_PRIVATE,size,0644|IPC_CREAT);
         result=(int *)shmat(memid,NULL,0);
-        result[0]=0;
+        
+        for(i=0;i<1024;i++) result[i]=0;
 
-        for(i=0;i<5;i++)
+        for(i=0;i<4;i++)
         {
             child=fork();
             
@@ -27,11 +30,18 @@
                 if(l == 2)
                 {
 
-                    int i;
-                    for(i=0;i<100000000;i++){
-
+                    int j;
+                  //  for(j=0;j<100000000;j++){}
+                    j=0;
+                    while(1==1){
+                        if(result[l*10+j]==0){
+                            result[l*10+j]=getpid();
+                            break;
+                        }
+                        else{
+                            j++;
+                        }
                     }
-                    result[0]=result[0]+1;
                     printf("Grandchild dead\n");
                     
                     exit(0);
@@ -45,27 +55,25 @@
             else
             {
                 printf("in the parent:%d,child:%d level:%d\n",getpid(),child,l);
-                if(l == 0)
-                {
-                while(1==1){
-
-                   // printf(" %d ",result[0]);
-                    if(result[0]>=3)
-                    {
-
-                        printf("Two grandchildren dead\n");
-                        printf("   \n %d   \n",result[0]);
-                        exit(0);
-                            
-                    }
-                }
-            }
+                
                 
             }
             
             
             
         }
+
+        if(l == 0){
+                    int j;
+                    for(j=0;j<10000000;j++){}
+                    j=0;
+                    while(result[20+j]!=0){
+                        printf("Grandchilden:%d  ",result[20+j]);
+                        j++;
+                    }
+                    printf("\n");
+
+                }
 
         
         
