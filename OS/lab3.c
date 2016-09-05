@@ -31,7 +31,7 @@
                 {
 
                     int j;
-                  //  for(j=0;j<100000000;j++){}
+                    for(j=0;j<100000000;j++){}
                     j=0;
                     while(1==1){
                         if(result[l*10+j]==0){
@@ -52,11 +52,8 @@
                 //--printf("in the child:%d,parent:%d\nlevel:%d\n",getpid(),getppid(),i);
                 
             }
-            else
-            {
-                printf("in the parent:%d,child:%d level:%d\n",getpid(),child,l);
-                
-                
+            else{
+                printf("in the parent:%d,child:%d level:%d\n",getpid(),child,l);    
             }
             
             
@@ -65,13 +62,19 @@
 
         if(l == 0){
                     int j;
-                    for(j=0;j<10000000;j++){}
-                    j=0;
-                    while(result[20+j]!=0){
-                        printf("Grandchilden:%d  ",result[20+j]);
-                        j++;
+                    //for(j=0;j<10000000;j++){}
+
+                    while(1==1){
+                        j=0;
+                        while(result[20+j]!=0){
+                          //  printf("Grandchilden:%d  ",result[20+j]);
+                            j++;
+                        }
+                      //  printf("%d",j);
+                        if(j>1) break;
                     }
-                    printf("\n");
+
+                    printf("Two Grandchilden dead \n");
 
                 }
 
