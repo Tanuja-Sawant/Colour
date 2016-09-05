@@ -20,12 +20,11 @@
         
         for(i=0;i<1024;i++) result[i]=0;
 
-        for(i=0;i<4;i++)
+        for(i=0;i<3;i++)
         {
             child=fork();
             
-            if(child == 0)
-            {
+            if(child == 0){
                 l++;
                 if(l == 2)
                 {
@@ -35,14 +34,17 @@
                     j=0;
                     while(1==1){
                         if(result[l*10+j]==0){
+                            printf("Grandchild dead\n"); 
                             result[l*10+j]=getpid();
+                            
                             break;
+
                         }
                         else{
                             j++;
                         }
                     }
-                    printf("Grandchild dead\n");
+                    
                     
                     exit(0);
                 }
@@ -53,7 +55,7 @@
                 
             }
             else{
-                printf("in the parent:%d,child:%d level:%d\n",getpid(),child,l);    
+                printf("In the parent:%d,child:%d level:%d\n",getpid(),child,l);    
             }
             
             
@@ -67,11 +69,11 @@
                     while(1==1){
                         j=0;
                         while(result[20+j]!=0){
-                          //  printf("Grandchilden:%d  ",result[20+j]);
+                           // printf("Grandchilden:%d  ",result[20+j]);
                             j++;
                         }
-                      //  printf("%d",j);
-                        if(j>1) break;
+                       // printf("%d",j);
+                        if(j>2) break;
                     }
 
                     printf("Two Grandchilden dead \n");
