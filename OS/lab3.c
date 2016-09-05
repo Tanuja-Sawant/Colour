@@ -20,7 +20,7 @@
         
         for(i=0;i<1024;i++) result[i]=0;
 
-        for(i=0;i<3;i++)
+        for(i=0;i<4;i++)
         {
             child=fork();
             
@@ -76,7 +76,7 @@
                         if(j>2) break;
                     }
 
-                    printf("Two Grandchilden dead \n");
+                    printf("Three Grandchildren dead \n");
 
                 }
 
