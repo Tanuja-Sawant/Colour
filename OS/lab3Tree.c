@@ -26,36 +26,25 @@
             
             if(child == 0){
                 l++;
-                if(l == 2)
-                {
-
                     int j;
-                    for(j=0;j<100000000;j++){}
+                   // for(j=0;j<100000000;j++){}
                     j=0;
                     while(1==1){
-                        if(result[l*10+j]==0){
-                            printf("Grandchild dead\n"); 
-                            result[l*10+j]=getpid();
-                            
+                        if(result[j]==0){
+                          //  printf("Grandchild dead\n"); 
+                            result[j]=getpid();
+                            result[j+1]=getppid();
                             break;
-
                         }
                         else{
-                            j++;
+                            j=j+2;
                         }
                     }
                     
                     
-                    exit(0);
-                }
-                
-
-                
-                //--printf("in the child:%d,parent:%d\nlevel:%d\n",getpid(),getppid(),i);
-                
             }
             else{
-                printf("In the parent:%d,child:%d level:%d\n",getpid(),child,l);    
+               // printf("In the parent:%d,child:%d level:%d\n",getpid(),child,l);    
             }
             
             
@@ -64,20 +53,14 @@
 
         if(l == 0){
                     int j;
-                    //for(j=0;j<10000000;j++){}
+                    for(j=0;j<100000000;j++){}
 
-                    while(1==1){
                         j=0;
-                        while(result[20+j]!=0){
-                            //printf("Grandchilden:%d  ",result[20+j]);
-                            j++;
+                        while(result[j]!=0){
+                            printf("child is:%d  parent is: %d \n",result[j], result[j+1]);
+                            j=j+2;
                         }
                       // printf("%d",j);
-                        if(j>2) break;
-                    }
-
-                    printf("Three Grandchildren dead \n");
-
                 }
 
         

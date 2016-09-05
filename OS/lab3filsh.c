@@ -53,13 +53,14 @@ int main()
 			int count= 0;
 			while (fgets(buf,2,fp)!=NULL)
 			{
+			//	printf("%s ",buf);
 				if(*buf == '2')
 				{
 					count++;
 
 					if(count == 2)
 					{
-						fprintf(fp,"%d",gen_num);
+						//fprintf(fp,"%d",gen_num);
 						printf("two grandchildren dead,parent exiting\n");
 						fclose(fp);
 						flag=0;
