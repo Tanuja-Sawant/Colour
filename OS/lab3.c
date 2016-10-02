@@ -73,10 +73,10 @@
                             j++;
                         }
                       // printf("%d",j);
-                        if(j>2) break;
+                        if(j>1) break;
                     }
 
-                    printf("Three Grandchildren dead \n");
+                    printf("Two Grandchildren dead \n");
 
                 }
 
