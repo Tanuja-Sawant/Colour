@@ -1,0 +1,10 @@
+ifconfig
+lwlist
+traceroute
+dig / nslookup
+arp
+route
+nmap
+scp
+ping
+ssh
