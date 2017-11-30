@@ -1,1 +1,1 @@
-# Colour
+Core Computer Science courses' code
